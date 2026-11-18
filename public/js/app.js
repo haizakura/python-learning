@@ -224,11 +224,7 @@
   S.load();
   const last = L.find((l) => l.id === S.data.last);
   if (!location.hash && last) {
-    try {
-      history.replaceState(null, '', '#' + last.id);
-    } catch (e) {
-      /* 某些沙箱环境不允许修改地址，直接渲染即可 */
-    }
+    history.replaceState(null, '', '#' + last.id);
     renderLesson(last, true);
     renderNav();
     toast(`已回到上次学习的位置：${last.title}`);

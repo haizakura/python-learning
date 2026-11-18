@@ -225,7 +225,7 @@
       hintBtn.disabled = shown >= hints.length;
     };
 
-    // 页面里不能用 confirm()，改成“再点一次确认”
+    // 用“再点一次确认”代替浏览器弹窗，不打断学习
     const resetBtn = $('.ex-reset');
     const solBtn = $('.ex-sol');
     const twoStep = (btn, label, ask, action) => {

@@ -31,12 +31,11 @@ const ok = (cond, where, msg) => {
 };
 
 /* ———— 1. 结构 ———— */
-const RESERVED = ['home', 'settings', 'sidebar', 'customize', 'upgrade', 'downloads'];
 const TYPES = ['text', 'tip', 'code', 'player', 'widget', 'quiz', 'exercise'];
 const ids = new Set();
 for (const l of DSA.lessons) {
   ok(/^[a-z0-9-]+$/.test(l.id), l.id, 'id 只能包含小写字母、数字和连字符');
-  ok(!RESERVED.includes(l.id) && !l.id.startsWith('comment-'), l.id, 'id 与保留字冲突');
+  ok(l.id !== 'home', l.id, 'id 不能是 home（首页占用）');
   ok(!ids.has(l.id), l.id, 'id 重复');
   ids.add(l.id);
   ok(l.title && l.part && Array.isArray(l.blocks) && l.blocks.length, l.id, '缺少 title / part / blocks');

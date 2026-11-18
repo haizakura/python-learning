@@ -18,7 +18,7 @@ DSA.lesson({
 });
 ```
 
-`id` 不能用 `home`、`settings`、`sidebar`、`customize`、`upgrade`、`downloads`，也不能以 `comment-` 开头（前一个是首页，其余是 Claude Artifacts 保留的）。
+`id` 不能用 `home`（首页的网址是 `#home`）。
 
 > 测验答案和练习代码按 `课程id:块序号` 保存。给已发布的课程在中间插入块，会让之后块的已存进度错位，尽量往末尾追加。
 

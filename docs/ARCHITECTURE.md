@@ -4,12 +4,12 @@
 
 | 决定 | 原因 |
 | --- | --- |
-| 纯静态网站，无构建、无 npm 依赖 | 同一份 `public/` 可以直接部署到 Cloudflare Workers；打包脚本只做“内联”就能发布为 Artifact |
-| 普通 `<script>`（非 ES Module），共享全局对象 `DSA` | 内联成单文件时不需要打包器；Node 测试可以用 `vm` 直接加载 |
+| 纯静态网站，无构建、无 npm 依赖 | `public/` 目录原样作为 Cloudflare Workers 的静态资源发布，改完即可部署 |
+| 普通 `<script>`（非 ES Module），共享全局对象 `DSA` | 不需要打包器；Node 测试可以用 `vm` 直接加载 |
 | 课程是数据，动画是生成器 | 新增课程不用改引擎；动画逻辑可以在 Node 里测试 |
-| 浏览器内 Python 用 Skulpt | 只需加载两个脚本，不需要 fetch 或 WebAssembly，能在 Artifacts 的 CSP 下运行（Pyodide 需要 fetch wasm，会被拦截） |
+| 浏览器内 Python 用 Skulpt | 约 1MB，首次点击“运行”很快就能用（Pyodide 是完整 CPython，但首次要下载 10MB 以上）；自带运行时间限制，死循环不会卡死页面 |
 | 进度存 `localStorage` | 需求明确不需要登录和跨设备同步 |
-| 路由用 `#课程id` | Artifacts 只保留形如 `#name` 的 hash，Workers 上也无需服务端路由 |
+| 路由用 `#课程id` | 静态托管无需服务端路由配置，刷新和分享链接都能直接打开对应课程 |
 
 ## 脚本加载顺序
 
@@ -94,7 +94,7 @@ DSA.record 每次 yield 时深拷贝 state ───┘──▶ frames[] = {s, 
 
 - 第一次点击“运行”时才从 jsDelivr 加载 `skulpt@1.2.0`（约 1MB），之后复用。
 - `execLimit: 5000` 毫秒：死循环会被自动停止，并给出白话解释；`yieldLimit: 100` 让长时间运行的代码定期让出主线程，页面不会卡死。
-- `input()` 被禁用，会提示“请直接给变量赋值”（Artifacts 里 `prompt()` 不可用）。
+- `input()` 被禁用，会提示“请直接给变量赋值”（Skulpt 默认会弹出浏览器的 `prompt()` 对话框，打断学习，练习判题也不需要输入）。
 - Skulpt 自带的 `heapq` 只是占位，`python.js` 里用一份纯 Python 实现替换了它。
 - **Skulpt 不支持的语法**：`nonlocal`；缩进错误会被报告为 `SyntaxError`。写课程代码时避开 `nonlocal`，并用 `tests/skulpt-selftest.js` 验证。
 - 常见错误（`NameError`、`IndexError`、`TypeError` 等）会附带中文白话解释，见 `python.js` 中的 `FRIENDLY`。
@@ -107,7 +107,6 @@ DSA.record 每次 yield 时深拷贝 state ───┘──▶ frames[] = {s, 
 | `cdn.jsdelivr.net/npm/skulpt@1.2.0` | 运行 Python | 显示提示和预期输出，其他功能不受影响 |
 | `fonts.googleapis.com` | Space Grotesk、JetBrains Mono 字体 | 由 JS 异步注入，不阻塞渲染，失败时使用系统字体 |
 
-两者都在 Artifacts 的 CSP 白名单内。
 
 ## 页面与样式
 

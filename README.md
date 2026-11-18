@@ -6,7 +6,7 @@
 
 - 不需要安装任何软件，不需要登录注册
 - 学习进度自动保存在浏览器的 `localStorage` 中，下次打开自动回到上次的课程和阅读位置（不跨设备同步）
-- 纯静态网站，无构建步骤、无 npm 依赖，可部署到 Cloudflare Workers 或发布为 Claude Artifact
+- 纯静态网站，无构建步骤、无 npm 依赖，部署在 Cloudflare Workers
 
 ## 课程目录（21 课）
 
@@ -44,9 +44,7 @@ node tests/check.mjs
 
 网页里实际运行 Python 的是 Skulpt。要确认课程代码在 Skulpt 中表现一致，打开网站，把 `tests/skulpt-selftest.js` 的内容粘贴到浏览器开发者工具的 Console 中运行。
 
-## 部署
-
-### Cloudflare Workers（纯静态资源）
+## 部署到 Cloudflare Workers
 
 ```bash
 npx wrangler@4 login     # 首次
@@ -54,14 +52,6 @@ npx wrangler@4 deploy
 ```
 
 配置在 [wrangler.jsonc](wrangler.jsonc)，直接把 `public/` 目录作为静态资源发布，不需要 Worker 脚本。如果登录的 Cloudflare 账号下有多个 account，先设置环境变量 `CLOUDFLARE_ACCOUNT_ID` 指定要部署到哪一个，否则 wrangler 会停下来让你选。
-
-### Claude Artifacts
-
-```bash
-node scripts/build-artifact.mjs
-```
-
-生成 `dist/artifact.html`：所有 CSS/JS 内联成一个文件，去掉 `<html>/<head>/<body>` 外壳（Artifacts 会自动加上）。把这个文件发布为 Artifact 即可。
 
 ## 项目结构
 
@@ -80,7 +70,6 @@ public/                 网站本体（直接部署这个目录）
   js/app.js             路由、目录、首页、课程页、进度恢复
 scripts/
   dev_server.py         本地开发服务器（禁用缓存）
-  build-artifact.mjs    打包成单文件 Artifact
 tests/
   check.mjs             课程内容自检（Node + CPython）
   skulpt-selftest.js    浏览器内 Skulpt 一致性自检

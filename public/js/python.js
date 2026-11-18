@@ -1,6 +1,6 @@
 /* python.js — 在浏览器里运行 Python（Skulpt），以及 Python 代码高亮。
- * Skulpt 是纯 JS 的 Python 3 实现，只需加载两个脚本文件，
- * 不需要 fetch/wasm，所以在 Claude Artifacts 的 CSP 下也能工作。
+ * Skulpt 是纯 JS 的 Python 3 实现，只需加载两个脚本文件（约 1MB），首次加载快，
+ * 并且自带运行时间限制，死循环不会卡死页面。
  * 限制：它是 Python 的一个子集（见 docs/ARCHITECTURE.md），课程代码都在其中测试过。 */
 DSA.py = (() => {
   const CDN = 'https://cdn.jsdelivr.net/npm/skulpt@1.2.0/dist/';

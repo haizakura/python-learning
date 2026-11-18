@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "python3 scripts/dev_server.py 8000",
     "test": "node tests/check.mjs",
-    "build:artifact": "node scripts/build-artifact.mjs",
     "deploy": "npx wrangler@4 deploy"
   }
 }
