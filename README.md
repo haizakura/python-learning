@@ -58,6 +58,7 @@ npx wrangler@4 deploy
 ```
 public/                 网站本体（直接部署这个目录）
   index.html            页面骨架，按顺序加载下面的脚本
+  favicon.svg           网站图标（logo 的唯一来源）；apple-touch-icon.png、favicon-32x32.png 由它生成
   css/style.css         全部样式（含明暗两套配色）
   js/core.js            全局命名空间 DSA 与纯函数工具（Node 测试也加载它）
   js/store.js           学习进度的读写（localStorage）
@@ -70,6 +71,7 @@ public/                 网站本体（直接部署这个目录）
   js/app.js             路由、目录、首页、课程页、进度恢复
 scripts/
   dev_server.py         本地开发服务器（禁用缓存）
+  make_icons.py         把 favicon.svg 渲染成 PNG 图标（改了 logo 后运行，需要 macOS + Chrome）
 tests/
   check.mjs             课程内容自检（Node + CPython）
   skulpt-selftest.js    浏览器内 Skulpt 一致性自检
