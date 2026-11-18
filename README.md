@@ -53,7 +53,7 @@ npx wrangler@4 login     # 首次
 npx wrangler@4 deploy
 ```
 
-配置在 [wrangler.jsonc](wrangler.jsonc)，直接把 `public/` 目录作为静态资源发布，不需要 Worker 脚本。
+配置在 [wrangler.jsonc](wrangler.jsonc)，直接把 `public/` 目录作为静态资源发布，不需要 Worker 脚本。如果登录的 Cloudflare 账号下有多个 account，先设置环境变量 `CLOUDFLARE_ACCOUNT_ID` 指定要部署到哪一个，否则 wrangler 会停下来让你选。
 
 ### Claude Artifacts
 
