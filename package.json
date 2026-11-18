@@ -1,0 +1,11 @@
+{
+  "name": "python-learning",
+  "private": true,
+  "description": "Python 图解算法：面向零基础的数据结构与算法互动教程",
+  "scripts": {
+    "dev": "python3 scripts/dev_server.py 8000",
+    "test": "node tests/check.mjs",
+    "build:artifact": "node scripts/build-artifact.mjs",
+    "deploy": "npx wrangler@4 deploy"
+  }
+}

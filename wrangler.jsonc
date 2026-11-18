@@ -1,0 +1,9 @@
+// Cloudflare Workers 配置：纯静态资源站点，不需要 Worker 脚本。
+// 部署：npx wrangler@4 deploy（首次需要 npx wrangler@4 login）
+{
+  "name": "python-learning",
+  "compatibility_date": "2025-06-01",
+  "assets": {
+    "directory": "./public"
+  }
+}
