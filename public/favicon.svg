@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- 与页面左上角的 .brand-mark 保持一致：左上浅蓝、右下黄色的对角拼色 + “Py” -->
+  <defs><clipPath id="r"><rect width="32" height="32" rx="8"/></clipPath></defs>
+  <g clip-path="url(#r)">
+    <rect width="32" height="32" fill="#f2cd5c"/>
+    <path d="M0 0H32L0 32Z" fill="#8fbbe8"/>
+  </g>
+  <text x="16" y="16.5" fill="#1f4f86" font-family="'JetBrains Mono','SF Mono',Menlo,Consolas,monospace" font-size="15" font-weight="700" text-anchor="middle" dominant-baseline="central">Py</text>
+</svg>
