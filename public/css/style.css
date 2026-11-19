@@ -99,7 +99,9 @@ input[type="text"] { font-family: var(--font-mono); }
   position: sticky; top: 0; height: 100vh; overflow-y: auto; background: var(--surface);
   border-right: 1px solid var(--line); padding: 22px 14px 48px;
 }
-main { width: 100%; max-width: 940px; margin: 0 auto; padding-block: 40px 96px; padding-left: max(32px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); outline: none; }
+main { width: 100%; max-width: 940px; margin: 0 auto; padding-block: 40px 96px; padding-left: max(32px, env(safe-area-inset-left, 0px)); padding-right: max(32px, env(safe-area-inset-right, 0px)); }
+/* 切换页面时脚本会聚焦 main（给读屏器用），浏览器可能把它算作 :focus-visible，这里不画焦点框 */
+main:focus-visible { outline: none; }
 .brand { display: flex; align-items: center; gap: 10px; font-family: var(--font-head); font-weight: 700; font-size: 17px; color: var(--ink); text-decoration: none; }
 .brand-mark {
   display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; font: 700 13px var(--font-mono);
